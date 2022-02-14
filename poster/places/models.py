@@ -1,3 +1,4 @@
+import re
 from tabnanny import verbose
 from django.db import models
 
@@ -33,3 +34,31 @@ class Excursion(models.Model):
     class Meta:
         verbose_name = 'Экскурсия'
         verbose_name_plural = 'Экскурсии'
+    
+class Image(models.Model):
+    excursion = models.ForeignKey(
+        'Excursion',
+        on_delete=models.CASCADE,
+        verbose_name='Экскурсия',
+        related_name='exc_photos'
+
+    )
+    photo = models.ImageField(
+        upload_to='photo',
+        verbose_name='Файл изображения',
+        blank=True,
+        null=True
+        )
+    sort_index = models.SmallIntegerField(
+        verbose_name='Порядок вывода',
+        default=1
+
+    )
+
+    def __str__(self) -> str:
+        return f'{self.sort_index} {self.excursion.title}'
+
+    class Meta:
+        verbose_name = 'Изображение'
+        verbose_name_plural = 'Изображения'
+#photo = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name='Фото')
