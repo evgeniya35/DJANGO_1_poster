@@ -49,10 +49,9 @@ class Image(models.Model):
         blank=True,
         null=True
         )
-    sort_index = models.SmallIntegerField(
+    sort_index = models.PositiveSmallIntegerField(
         verbose_name='Порядок вывода',
-        default=1
-
+        default=0
     )
 
     def __str__(self) -> str:
@@ -61,4 +60,4 @@ class Image(models.Model):
     class Meta:
         verbose_name = 'Изображение'
         verbose_name_plural = 'Изображения'
-#photo = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name='Фото')
+        ordering = ['sort_index']
