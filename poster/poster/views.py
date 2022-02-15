@@ -1,6 +1,7 @@
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, get_object_or_404
 from places.admin import Excursion
+from django.urls import reverse
 from pprint import pprint
 
 def show_index(request):
@@ -17,7 +18,7 @@ def show_index(request):
                 'properties': {
                     'title': place.title,
                     'placeId': place.id,
-                    'detailsUrl': 'static/places/moscow_legends.json'
+                    'detailsUrl': reverse('places', args=[place.id])
                 }
             }
         )
