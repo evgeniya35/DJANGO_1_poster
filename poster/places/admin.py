@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.utils.html import format_html
 from places.models import Excursion, Image
 
 # Register your models here.
@@ -6,6 +7,14 @@ from places.models import Excursion, Image
 class ImageInline(admin.TabularInline):
     model = Image
     extra = 1
+    readonly_fields = ('get_preview',)
+    fields = ('photo', 'get_preview', 'sort_index',)
+
+    def get_preview(self, obj, width=200):
+        return format_html(
+            f'<img src="{obj.photo.url}" width="{width}" />'
+        )
+
 
 class ExcursionAdmin(admin.ModelAdmin):
     # форма элемента
