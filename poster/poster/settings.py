@@ -10,11 +10,11 @@ env.read_env()
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = env.str('SECRET_KEY', 'REPLACE_ME')
+SECRET_KEY = env.str('SECRET_KEY', 'xv$@jk*%3)^arx^@r(8vxq$^nq)maij@_8hn!wbp7v_(_7xoh6')
 
-DEBUG = env.bool('DEBUG', False)
+DEBUG = env.bool('DEBUG', True)
 
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', [])
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', ['*.pythonanywhere.com'])
 
 # Application definition
 
@@ -112,7 +112,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+if DEBUG:
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, 'static'),
+    ]
+else:
+    STATIC_ROOT = env('STATIC_ROOT', os.path.join(BASE_DIR, 'static'))
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
