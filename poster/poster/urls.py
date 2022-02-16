@@ -15,7 +15,7 @@ Including another URLconf
 """
 from poster import settings
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.conf.urls.static import static
 
 from .views import show_index, places
@@ -24,6 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', show_index),
     path('places/<int:place_id>/', places, name='places'),
+    path('tinymce/', include('tinymce.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

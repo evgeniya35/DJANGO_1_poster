@@ -2,6 +2,8 @@ import re
 from tabnanny import verbose
 from django.db import models
 
+from tinymce import models as tinymce_models
+
 # Create your models here.
 
 class Excursion(models.Model):
@@ -14,7 +16,7 @@ class Excursion(models.Model):
         blank=True,
         default=''
     )
-    description_long = models.TextField(
+    description_long = tinymce_models.HTMLField(
         verbose_name='Полное описание',
         blank=True,
         default=''
