@@ -10,11 +10,12 @@ env.read_env()
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = env.str('SECRET_KEY', 'xv$@jk*%3)^arx^@r(8vxq$^nq)maij@_8hn!wbp7v_(_7xoh6')
+SECRET_KEY = env.str(
+    'SECRET_KEY', 'xv$@jk*%3)^arx^@r(8vxq$^nq)maij@_8hn!wbp7v_(_7xoh6')
 
 DEBUG = env.bool('DEBUG', True)
 
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', ['*.pythonanywhere.com'])
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', ['johnss.pythonanywhere.com', '127.0.0.1'])
 
 # Application definition
 
@@ -28,7 +29,7 @@ INSTALLED_APPS = [
 
     'adminsortable2',
     'tinymce',
-    
+
     'places.apps.PlacesConfig',
 ]
 
@@ -113,7 +114,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-        os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'static'),
 ]
 
 STATIC_ROOT = env.str('STATIC_ROOT', os.path.join(BASE_DIR, 'staticfolder'))

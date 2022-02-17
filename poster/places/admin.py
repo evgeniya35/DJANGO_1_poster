@@ -7,6 +7,7 @@ from adminsortable2.admin import SortableInlineAdminMixin
 
 # Register your models here.
 
+
 class ImageInline(SortableInlineAdminMixin, admin.TabularInline):
     model = Image
     extra = 1
@@ -24,7 +25,8 @@ class ExcursionAdmin(admin.ModelAdmin):
     # форма элемента
     fieldsets = [
         (None,         {'fields': ['title']}),
-        ('Описание',   {'fields': ['description_short', 'description_long'], 'classes': ['collapse']}),
+        ('Описание',   {'fields': ['description_short',
+         'description_long'], 'classes': ['collapse']}),
         ('Координаты', {'fields': ['lat', 'lon'], 'classes': ['collapse']}),
     ]
     search_fields = ['title']
@@ -32,5 +34,5 @@ class ExcursionAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Excursion, ExcursionAdmin)
-if settings.DEBUG: admin.site.register(Image)
-
+if settings.DEBUG:
+    admin.site.register(Image)

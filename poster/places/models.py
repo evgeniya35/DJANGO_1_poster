@@ -6,6 +6,7 @@ from tinymce import models as tinymce_models
 
 # Create your models here.
 
+
 class Excursion(models.Model):
     title = models.CharField(
         max_length=100,
@@ -23,7 +24,7 @@ class Excursion(models.Model):
     )
     lat = models.FloatField(
         verbose_name='Широта',
-        default= 55
+        default=55
     )
     lon = models.FloatField(
         verbose_name='Долгота',
@@ -36,7 +37,8 @@ class Excursion(models.Model):
     class Meta:
         verbose_name = 'Экскурсия'
         verbose_name_plural = 'Экскурсии'
-    
+
+
 class Image(models.Model):
     excursion = models.ForeignKey(
         'Excursion',
@@ -50,7 +52,7 @@ class Image(models.Model):
         verbose_name='Файл изображения',
         blank=True,
         null=True
-        )
+    )
     sort_index = models.PositiveSmallIntegerField(
         verbose_name='Порядок вывода',
         default=0
