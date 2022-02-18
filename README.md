@@ -68,6 +68,7 @@ python manage.py runserver
 ```bash
 python manage.py load_place {URLFile1 URLFile2 URLFile3 ..}
 ```
+Пример команды с несколькими url можно взять из файла `places_urls.txt`
 
 Файлы с данными можно взять [здесь](https://github.com/devmanorg/where-to-go-places.git).
 

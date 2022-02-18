@@ -22,7 +22,7 @@ class Command(BaseCommand):
 
 
     def handle(self, *args, **options):
-        self.stdout.write(f'Load data...{options["url"]}')
+        self.stdout.write(f'Load data...{len(options["url"])}')
         for url in options["url"]:
             response = requests.get(url)
             response.raise_for_status()
