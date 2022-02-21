@@ -1,11 +1,10 @@
 from django.contrib import admin
 from django.utils.html import format_html
+from django.utils.safestring import mark_safe
 from django.conf import settings
 
 from places.models import Excursion, Image
 from adminsortable2.admin import SortableInlineAdminMixin
-
-# Register your models here.
 
 
 class ImageInline(SortableInlineAdminMixin, admin.TabularInline):
@@ -16,7 +15,9 @@ class ImageInline(SortableInlineAdminMixin, admin.TabularInline):
 
     def get_preview(self, obj, width=200):
         return format_html(
-            f'<img src="{obj.photo.url}" width="{width}" />'
+            '<img src="{}" width="{}" />',
+            mark_safe(obj.photo.url),
+            width
         )
     get_preview.short_description = 'ИЗОБРАЖЕНИЕ'
 
