@@ -6,41 +6,41 @@ from pprint import pprint
 
 
 def show_index(request):
-    places = Excursion.objects.all()
+    excurions = Excursion.objects.all()
     features = []
-    for place in places:
+    for excurion in excurions:
         features.append(
             {
                 'type': 'Feature',
                 'geometry': {
                     'type': 'Point',
-                    'coordinates': [place.lon, place.lat]
+                    'coordinates': [excurion.lon, excurion.lat]
                 },
                 'properties': {
-                    'title': place.title,
-                    'placeId': place.id,
-                    'detailsUrl': reverse('places', args=[place.id])
+                    'title': excurion.title,
+                    'placeId': excurion.id,
+                    'detailsUrl': reverse('places', args=[excurion.id])
                 }
             }
         )
-    excursions = {
+    attributes = {
         'type': 'FeatureCollection',
         'features': features
     }
-    context = {'excursions': excursions}
+    context = {'excursions': attributes}
     return render(request, 'index.html', context)
 
 
 def places(request, place_id=1):
-    place = get_object_or_404(Excursion, pk=place_id)
+    excurion = get_object_or_404(Excursion, pk=place_id)
     place_context = {
-        'title': place.title,
-        'imgs': [img.photo.url for img in place.exc_photos.all().order_by('sort_index')],
-        'description_short': place.description_short,
-        'description_long': place.description_long,
+        'title': excurion.title,
+        'imgs': [img.photo.url for img in excurion.exc_photos.all().order_by('sort_index')],
+        'description_short': excurion.description_short,
+        'description_long': excurion.description_long,
         'coordinates': {
-            'lat': place.lat,
-            'lng': place.lon
+            'lat': excurion.lat,
+            'lng': excurion.lon
         }
     }
     return JsonResponse(place_context, json_dumps_params={'ensure_ascii': False})
