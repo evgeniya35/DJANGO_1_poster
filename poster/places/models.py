@@ -14,25 +14,21 @@ class Excursion(models.Model):
     )
     description_short = models.TextField(
         verbose_name='Краткое описание',
-        blank=True,
-        default=''
+        blank=True
     )
     description_long = tinymce_models.HTMLField(
         verbose_name='Полное описание',
-        blank=True,
-        default=''
+        blank=True
     )
     lat = models.FloatField(
-        verbose_name='Широта',
-        default=55
+        verbose_name='Широта'
     )
     lon = models.FloatField(
-        verbose_name='Долгота',
-        default=37
+        verbose_name='Долгота'
     )
 
     def __str__(self) -> str:
-        return f'{self.title}'
+        return self.title
 
     class Meta:
         verbose_name = 'Экскурсия'
@@ -44,14 +40,12 @@ class Image(models.Model):
         'Excursion',
         on_delete=models.CASCADE,
         verbose_name='Экскурсия',
-        related_name='exc_photos'
+        related_name='photos'
 
     )
     photo = models.ImageField(
         upload_to='photo',
-        verbose_name='Файл изображения',
-        blank=True,
-        null=True
+        verbose_name='Файл изображения'
     )
     sort_index = models.PositiveSmallIntegerField(
         verbose_name='Порядок вывода',

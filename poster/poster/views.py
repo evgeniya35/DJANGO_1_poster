@@ -35,7 +35,7 @@ def places(request, place_id=1):
     excurion = get_object_or_404(Excursion, pk=place_id)
     place_context = {
         'title': excurion.title,
-        'imgs': [img.photo.url for img in excurion.exc_photos.all().order_by('sort_index')],
+        'imgs': [img.photo.url for img in excurion.photos.all().order_by('sort_index')],
         'description_short': excurion.description_short,
         'description_long': excurion.description_long,
         'coordinates': {
