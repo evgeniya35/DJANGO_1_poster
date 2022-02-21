@@ -8,24 +8,11 @@ from tinymce import models as tinymce_models
 
 
 class Excursion(models.Model):
-    title = models.CharField(
-        max_length=100,
-        verbose_name='Название'
-    )
-    description_short = models.TextField(
-        verbose_name='Краткое описание',
-        blank=True
-    )
-    description_long = tinymce_models.HTMLField(
-        verbose_name='Полное описание',
-        blank=True
-    )
-    lat = models.FloatField(
-        verbose_name='Широта'
-    )
-    lon = models.FloatField(
-        verbose_name='Долгота'
-    )
+    title = models.CharField(max_length=100, verbose_name='Название')
+    description_short = models.TextField(verbose_name='Краткое описание', blank=True)
+    description_long = tinymce_models.HTMLField(verbose_name='Полное описание', blank=True)
+    lat = models.FloatField(verbose_name='Широта')
+    lon = models.FloatField(verbose_name='Долгота')
 
     def __str__(self) -> str:
         return self.title
@@ -43,14 +30,8 @@ class Image(models.Model):
         related_name='photos'
 
     )
-    photo = models.ImageField(
-        upload_to='photo',
-        verbose_name='Файл изображения'
-    )
-    sort_index = models.PositiveSmallIntegerField(
-        verbose_name='Порядок вывода',
-        default=0
-    )
+    photo = models.ImageField(upload_to='photo', verbose_name='Файл изображения')
+    sort_index = models.PositiveSmallIntegerField(verbose_name='Порядок вывода', default=0)
 
     def __str__(self) -> str:
         return f'{self.sort_index} {self.excursion.title}'
