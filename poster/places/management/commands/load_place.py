@@ -27,17 +27,18 @@ class Command(BaseCommand):
             response = requests.get(url)
             response.raise_for_status()
             place_content = response.json()
+            place_content.setdefault('coordinates', {'lat': 55, 'lng': 37}),
             excursion, created = Excursion.objects.update_or_create(
-                title=place_content['title'],
+                title=place_content.get('title', 'Default title'),
                 defaults={
-                    'description_short': place_content['description_short'],
-                    'description_long': place_content['description_long'],
-                    'lat': place_content['coordinates']['lat'],
-                    'lon': place_content['coordinates']['lng']
+                    'description_short': place_content.get('description_short', 'Default description_short'),
+                    'description_long': place_content.get('description_long', 'Default description_long'),
+                    'lat': place_content['coordinates'].get('lat', 55),
+                    'lon': place_content['coordinates'].get('lng', 37)
                 }
             )
             self.stdout.write(f'Load {excursion.title} {created}')
-            for num, img in enumerate(place_content['imgs'], start=1):
+            for num, img in enumerate(place_content.get('imgs'), start=1):
                 response = requests.get(img)
                 response.raise_for_status()
                 img_name = urlparse(img).path.split('/')[-1]
