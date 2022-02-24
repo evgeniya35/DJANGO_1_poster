@@ -8,9 +8,9 @@ from tinymce import models as tinymce_models
 
 
 class Excursion(models.Model):
-    title = models.CharField(max_length=100, verbose_name='Название')
-    description_short = models.TextField(verbose_name='Краткое описание', blank=True)
-    description_long = tinymce_models.HTMLField(verbose_name='Полное описание', blank=True)
+    title = models.CharField(max_length=100, verbose_name='Название', default='There is no title')
+    description_short = models.TextField(verbose_name='Краткое описание', blank=True, default='There is no description_short')
+    description_long = tinymce_models.HTMLField(verbose_name='Полное описание', blank=True, default='There is no description_long')
     lat = models.FloatField(verbose_name='Широта')
     lon = models.FloatField(verbose_name='Долгота')
 
