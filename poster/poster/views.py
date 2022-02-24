@@ -23,17 +23,17 @@ def show_index(request):
                 }
             }
         )
-    attributes = {
+    feature_collection = {
         'type': 'FeatureCollection',
         'features': features
     }
-    context = {'excursions': attributes}
+    context = {'excursions': feature_collection}
     return render(request, 'index.html', context)
 
 
 def places(request, place_id=1):
     excurion = get_object_or_404(Excursion, pk=place_id)
-    place_context = {
+    excurion_context = {
         'title': excurion.title,
         'imgs': [img.photo.url for img in excurion.photos.all().order_by('sort_index')],
         'description_short': excurion.description_short,
@@ -43,4 +43,4 @@ def places(request, place_id=1):
             'lng': excurion.lon
         }
     }
-    return JsonResponse(place_context, json_dumps_params={'ensure_ascii': False})
+    return JsonResponse(excurion_context, json_dumps_params={'ensure_ascii': False})
